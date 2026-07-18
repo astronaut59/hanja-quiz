@@ -1,17 +1,543 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; color: #1c1b17; -webkit-text-stroke: #1c1b17; background-color: #f9f4ea; min-height: 19.0px}
-    span.s1 {font-kerning: none}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아윤이의 6급 한자 시험장</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF6EE;
+  --paper-deep:#F2ECDF;
+  --ink:#26241E;
+  --ink-soft:#6B665A;
+  --ink-faint:#A39C8C;
+  --stamp:#BE3B2B;
+  --stamp-soft:#F6E2DE;
+  --celadon:#4E7A6A;
+  --celadon-soft:#E2EDE8;
+  --line:rgba(38,36,30,.16);
+  --grid:#D8CFC0;
+  --serif:'Noto Serif KR',serif;
+  --sans:'IBM Plex Sans KR',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  min-height:100vh;
+}
+.wrap{max-width:720px;margin:0 auto;padding:24px 20px 80px}
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:16px;margin-bottom:28px;
+  border-bottom:2px solid var(--ink);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.seal{
+  width:44px;height:44px;border-radius:8px;
+  background:var(--stamp);color:#fff;
+  font-family:var(--serif);font-size:20px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  transform:rotate(-4deg);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);
+  flex-shrink:0;
+}
+.brand h1{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.01em}
+.brand p{font-size:12px;color:var(--ink-soft);margin-top:1px}
+.badge{
+  font-size:12px;font-weight:700;color:var(--stamp);
+  border:1.5px solid var(--stamp);border-radius:999px;
+  padding:4px 12px;white-space:nowrap;
+}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--stamp);margin-bottom:6px}
+h2.sect{font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:4px}
+.sub{font-size:14px;color:var(--ink-soft);margin-bottom:20px}
+
+.modes{display:grid;gap:12px}
+.mode{
+  display:flex;align-items:center;gap:16px;text-align:left;width:100%;
+  background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;cursor:pointer;font-family:var(--sans);
+  transition:transform .12s ease,border-color .12s ease;
+}
+.mode:hover{border-color:var(--ink);transform:translateY(-1px)}
+.mode:focus-visible,button:focus-visible,input:focus-visible{outline:2.5px solid var(--stamp);outline-offset:2px}
+.mode .glyph{
+  width:52px;height:52px;flex-shrink:0;border-radius:10px;
+  font-family:var(--serif);font-size:26px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+}
+.g-red{background:var(--stamp-soft);color:var(--stamp)}
+.g-green{background:var(--celadon-soft);color:var(--celadon)}
+.g-ink{background:var(--paper-deep);color:var(--ink)}
+.mode b{display:block;font-size:16px;font-weight:700}
+.mode span{font-size:13px;color:var(--ink-soft)}
+
+.typegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:8px}
+.typebtn{
+  background:#fff;border:1px solid var(--line);border-radius:10px;
+  padding:14px 12px;cursor:pointer;text-align:center;font-family:var(--sans);
+}
+.typebtn:hover{border-color:var(--ink)}
+.typebtn b{display:block;font-size:15px}
+.typebtn span{font-size:12px;color:var(--ink-soft)}
+
+.bar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ink-soft);margin-bottom:8px}
+.bar b{color:var(--ink)}
+.track{height:5px;background:var(--paper-deep);border-radius:3px;overflow:hidden;margin-bottom:24px}
+.fill{height:100%;background:var(--stamp);border-radius:3px;transition:width .3s ease}
+
+.qcard{
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:28px 22px;text-align:center;margin-bottom:18px;
+}
+.qtype{
+  display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;
+  color:var(--stamp);background:var(--stamp-soft);
+  border-radius:999px;padding:3px 12px;margin-bottom:14px;
+}
+.hanja-lg{font-family:var(--serif);font-size:64px;font-weight:600;line-height:1.15}
+.hanja-md{font-family:var(--serif);font-size:38px;font-weight:600;line-height:1.3}
+.hint{font-size:14px;color:var(--celadon);margin-top:10px;font-weight:500}
+
+.gridbox{
+  width:150px;height:150px;margin:6px auto 0;position:relative;
+  border:2px solid var(--grid);border-radius:6px;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+}
+.gridbox::before,.gridbox::after{content:"";position:absolute;background:var(--grid);opacity:.55}
+.gridbox::before{left:50%;top:4px;bottom:4px;width:1px;transform:translateX(-.5px)}
+.gridbox::after{top:50%;left:4px;right:4px;height:1px;transform:translateY(-.5px)}
+.gridbox .x1,.gridbox .x2{position:absolute;left:-14%;right:-14%;top:50%;height:1px;background:var(--grid);opacity:.4}
+.gridbox .x1{transform:rotate(45deg)}
+.gridbox .x2{transform:rotate(-45deg)}
+.gridbox .ch{font-family:var(--serif);font-size:96px;font-weight:600;position:relative;z-index:1}
+.gridbox.empty .ch{color:var(--ink-faint);font-size:40px;font-family:var(--sans);font-weight:500}
+
+.answer-row{display:flex;gap:10px;justify-content:center;align-items:stretch;flex-wrap:wrap}
+input.ans{
+  font-family:var(--sans);font-size:18px;text-align:center;
+  border:1.5px solid var(--line);border-radius:10px;
+  padding:12px 16px;width:min(300px,100%);background:#fff;color:var(--ink);
+}
+input.ans::placeholder{color:var(--ink-faint);font-size:15px}
+button.primary,button.ghost{
+  font-family:var(--sans);font-size:15px;font-weight:700;cursor:pointer;
+  border-radius:10px;padding:12px 22px;transition:transform .1s ease;
+}
+button.primary{background:var(--ink);color:var(--paper);border:1.5px solid var(--ink)}
+button.primary:hover{transform:translateY(-1px)}
+button.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+button.ghost:hover{border-color:var(--ink)}
+
+.choices{display:grid;gap:10px;max-width:420px;margin:0 auto}
+button.choice{
+  font-family:var(--sans);font-size:17px;text-align:left;cursor:pointer;
+  background:#fff;border:1.5px solid var(--line);border-radius:10px;
+  padding:13px 16px;color:var(--ink);
+}
+button.choice .num{
+  display:inline-flex;width:22px;height:22px;border-radius:50%;
+  border:1.5px solid var(--ink-faint);color:var(--ink-soft);
+  font-size:12px;font-weight:700;align-items:center;justify-content:center;
+  margin-right:10px;vertical-align:-4px;
+}
+button.choice:hover{border-color:var(--ink)}
+button.choice.ok{background:var(--celadon-soft);border-color:var(--celadon);color:var(--celadon)}
+button.choice.ok .num{border-color:var(--celadon);color:var(--celadon)}
+button.choice.no{background:var(--stamp-soft);border-color:var(--stamp);color:var(--stamp)}
+button.choice.no .num{border-color:var(--stamp);color:var(--stamp)}
+
+.fb{min-height:64px;text-align:center;margin-top:16px}
+.fb .head{font-size:16px;font-weight:700}
+.fb .head.good{color:var(--celadon)}
+.fb .head.bad{color:var(--stamp)}
+.fb .tip{font-size:14px;color:var(--ink-soft);margin-top:4px}
+.streak{color:var(--stamp);font-weight:700}
+
+.result{text-align:center;padding-top:8px}
+.stampwrap{position:relative;display:inline-block;margin:10px 0 4px}
+.bigstamp{
+  width:120px;height:120px;border-radius:50%;
+  border:5px solid var(--stamp);color:var(--stamp);
+  font-family:var(--serif);font-size:38px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  transform:rotate(-9deg);
+  animation:stampin .45s cubic-bezier(.2,1.6,.4,1) both;
+}
+.bigstamp.fail{border-color:var(--ink-soft);color:var(--ink-soft);font-size:26px}
+@keyframes stampin{from{transform:rotate(-9deg) scale(2.4);opacity:0}to{transform:rotate(-9deg) scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.bigstamp{animation:none}.mode,button.primary{transition:none}}
+.scorebar{display:flex;gap:10px;justify-content:center;margin:20px 0}
+.scorecell{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 22px}
+.scorecell small{display:block;font-size:12px;color:var(--ink-soft)}
+.scorecell b{font-size:22px;font-family:var(--serif)}
+.review{
+  text-align:left;background:#fff;border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;margin:18px 0;
+}
+.review h3{font-size:15px;margin-bottom:8px}
+.review .item{border-top:1px dashed var(--line);padding:10px 0;font-size:14px}
+.review .item:first-of-type{border-top:none}
+.review .q{font-family:var(--serif);font-size:17px;font-weight:600}
+.review .a{color:var(--stamp);font-weight:700}
+.review .t{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.perfect{color:var(--celadon);font-weight:700;margin:14px 0}
+.timer{font-variant-numeric:tabular-nums}
+footer{margin-top:36px;text-align:center;font-size:12px;color:var(--ink-faint)}
+.backlink{background:none;border:none;color:var(--ink-soft);font-size:13px;cursor:pointer;font-family:var(--sans);text-decoration:underline;margin-bottom:16px}
+@media (max-width:480px){
+  .hanja-lg{font-size:52px}
+  .brand h1{font-size:17px}
+  .scorecell{padding:10px 14px}
+}
+</style>
 </head>
 <body>
-<p class="p1"><span class="s1"></span><br></p>
+<div class="wrap">
+<header>
+  <div class="brand">
+    <div class="seal">合</div>
+    <div>
+      <h1>아윤이의 6급 한자 시험장</h1>
+      <p>한국어문회 기출 유형 연습</p>
+    </div>
+  </div>
+  <span class="badge">6급 · 합격선 70%</span>
+</header>
+<main id="app"></main>
+<footer>한국어문회 한자능력검정시험 6급 출제 유형 기준 · 아윤이 파이팅!</footer>
+</div>
+
+<script>
+"use strict";
+/* ---------- 문제 은행 (어문회 6급 배정한자 기준) ---------- */
+
+/* 유형 1 · 독음 쓰기 (주관식) */
+const READ=[
+["强力","강력","강할 강 + 힘 력"],["計算","계산","셀 계 + 셈 산"],["高速","고속","높을 고 + 빠를 속"],
+["光線","광선","빛 광 + 줄 선"],["交通","교통","사귈 교 + 통할 통"],["區分","구분","구분할 구 + 나눌 분"],
+["急行","급행","급할 급 + 다닐 행"],["多幸","다행","많을 다 + 다행 행"],["道理","도리","길 도 + 다스릴 리"],
+["讀者","독자","읽을 독 + 놈 자"],["美術","미술","아름다울 미 + 재주 술"],["反省","반성","돌이킬 반 + 살필 성"],
+["發表","발표","필 발 + 겉 표"],["病者","병자","병 병 + 놈 자"],["所聞","소문","바 소 + 들을 문"],
+["勝利","승리","이길 승 + 이할 리"],["新聞","신문","새 신 + 들을 문"],["野球","야구","들 야 + 공 구"],
+["溫度","온도","따뜻할 온 + 법도 도"],["銀行","은행","은 은 + 다닐 행"],["醫術","의술","의원 의 + 재주 술"],
+["作家","작가","지을 작 + 집 가"],["特別","특별","특별할 특 + 다를 별"],["敎訓","교훈","가르칠 교 + 가르칠 훈"]
+].map(x=>({t:"read",q:x[0],accept:[x[1]],tip:x[2]}));
+
+/* 유형 2 · 훈과 음 쓰기 (주관식) */
+const HUN=[
+["感","느낄 감",["느낄감"],"마음 심(心)이 아래에! 마음으로 느껴요"],
+["開","열 개",["열개"],"문 문(門)을 두 손으로 활짝 열어요"],
+["京","서울 경",["서울경"],"높은 집이 모인 곳이 서울"],
+["苦","쓸 고",["쓸고"],"풀 초(艹)가 위에, 쓴 풀의 맛"],
+["郡","고을 군",["고을군"],"임금 군(君) + 고을 읍(阝)"],
+["根","뿌리 근",["뿌리근"],"나무 목(木)이 왼쪽에, 나무의 뿌리"],
+["短","짧을 단",["짧을단"],"긴 장(長)의 반대!"],
+["待","기다릴 대",["기다릴대"],"길에서(彳) 절(寺)에 갈 사람을 기다려요"],
+["頭","머리 두",["머리두"],"콩 두(豆)처럼 둥근 머리"],
+["禮","예도 례",["예도례","예도예"],"보일 시(示)가 왼쪽, 예절을 보여요"],
+["綠","푸를 록",["푸를록","푸를녹"],"실 사(糸)로 물들인 푸른색"],
+["服","옷 복",["옷복"],"교복·한복의 복!"],
+["雪","눈 설",["눈설"],"비 우(雨)가 얼면 눈이 돼요"],
+["孫","손자 손",["손자손"],"아들 자(子)가 왼쪽에, 아들의 아들"],
+["樹","나무 수",["나무수"],"나무 목(木)이 왼쪽에 서 있어요"],
+["習","익힐 습",["익힐습"],"깃 우(羽), 새가 날개짓을 익혀요"],
+["失","잃을 실",["잃을실"],"손에서 물건이 툭 떨어진 모양"],
+["夜","밤 야",["밤야"],"저녁 석(夕)이 숨어 있는 깜깜한 밤"],
+["勇","날랠 용",["날랠용"],"힘 력(力)이 아래에, 용감한 힘!"],
+["遠","멀 원",["멀원"],"쉬엄쉬엄 갈 착(辶), 멀리 가요"],
+["銀","은 은",["은은"],"쇠 금(金)이 왼쪽에, 반짝이는 은"],
+["飮","마실 음",["마실음"],"밥 식(食)이 왼쪽에, 먹고 마셔요"],
+["晝","낮 주",["낮주"],"해 일(日)이 떠 있는 환한 낮"],
+["窓","창 창",["창창"],"구멍 혈(穴)이 위에, 벽에 뚫은 창문"]
+].map(x=>({t:"hun",q:x[0],disp:x[1],accept:x[2],tip:x[3]}));
+
+/* 유형 3 · 한자 쓰기 (6급 쓰기 출제범위 = 7급 배정한자 150자) — 자기 채점 */
+const WRITE=[
+["집 가","家","갓머리(宀) 아래 돼지(豕), 옛날엔 집에 돼지를 길렀어요"],
+["강 강","江","물 수(氵) + 장인 공(工)"],
+["빌 공","空","구멍 혈(穴) 아래가 텅 비었어요, 하늘 공!"],
+["기운 기","氣","쌀 미(米)로 밥 지을 때 나는 김"],
+["사내 남","男","밭 전(田)에서 힘(力)쓰는 사람"],
+["농사 농","農","曲 + 辰, 새벽별 보고 나가 농사지어요"],
+["대답 답","答","대 죽(竹) 아래 합할 합(合)"],
+["움직일 동","動","무거울 중(重)을 힘(力)으로 움직여요"],
+["힘 력","力","팔에 힘을 준 모양"],
+["매양 매","每","어머니 모(母)가 숨어 있어요, 늘·항상"],
+["물건 물","物","소 우(牛)가 왼쪽에 있는 물건"],
+["심을 식","植","나무 목(木)을 곧게(直) 심어요"],
+["편안 안","安","집(宀) 안에 여자(女)가 있으면 편안해요"],
+["기를 육","育","몸에 살(月)이 붙도록 길러요"],
+["마당 장","場","흙 토(土)로 다진 넓은 마당"],
+["번개 전","電","비 우(雨) 아래 번쩍! 전기의 전"],
+["곧을 직","直","열 개(十)의 눈(目)으로 봐도 곧아요"],
+["편할 편","便","사람 인(亻)이 고치면(更) 편해져요"],
+["바다 해","海","물 수(氵) + 매양 매(每)"],
+["효도 효","孝","늙을 로(耂)를 아들(子)이 업은 모양"]
+].map(x=>({t:"write",q:x[0],a:x[1],tip:x[2]}));
+
+/* 유형 4 · 반대(상대)자 — 객관식 */
+const OPPO=[
+["强","강할 강","弱","약할 약",["水","高","近"]],
+["遠","멀 원","近","가까울 근",["速","道","運"]],
+["晝","낮 주","夜","밤 야",["朝","夕","明"]],
+["生","날 생","死","죽을 사",["活","命","身"]],
+["古","예 고","今","이제 금",["昨","時","永"]],
+["苦","쓸 고","樂","즐길 락",["味","甘","幸"]],
+["長","길 장","短","짧을 단",["高","小","大"]],
+["先","먼저 선","後","뒤 후",["前","次","始"]]
+].map(x=>({t:"oppo",q:x[0],qh:x[1],a:x[2],ah:x[3],d:x[4],tip:`${x[1]} ↔ ${x[3]}`}));
+
+/* 유형 5 · 사자성어 완성 — 객관식 */
+const IDIOM=[
+["作心三□","결심이 사흘을 못 감","日",["月","年","山"],"작심삼일","마음(心)을 지어도(作) 딱 3일(日)!"],
+["□發百中","백 번 쏘아 백 번 맞힘","百",["白","千","十"],"백발백중","백 번 쏘면 백 번 명중!"],
+["東問西□","엉뚱한 대답을 함","答",["道","言","文"],"동문서답","동쪽을 묻는데 서쪽을 답해요"],
+["八方□人","여러 방면에 능한 사람","美",["米","每","大"],"팔방미인","여덟 방향 어디서 봐도 멋져요"],
+["九死一□","여러 번 죽을 고비를 넘김","生",["年","山","王"],"구사일생","아홉 번 죽을 뻔, 한 번 살았다!"],
+["淸風明□","맑은 바람과 밝은 달","月",["日","水","山"],"청풍명월","밝을 명(明) 뒤엔 달 월(月)"],
+["山川草□","산과 내와 풀과 나무","木",["水","林","花"],"산천초목","산·내·풀·나무 순서로 외워요"],
+["男女老□","남녀노소, 모든 사람","少",["小","水","年"],"남녀노소","늙을 로(老)의 반대는 젊을 소(少)"]
+].map(x=>({t:"idiom",q:x[0],hint:x[1],a:x[2],d:x[3],full:x[4],tip:x[5]}));
+
+/* 유형 6 · 필순 — 객관식 */
+const STROKE=[
+["中","가운데 중","가운데 세로획(丨)은 몇 번째로 쓸까요?","네 번째(마지막)",["첫 번째","두 번째","세 번째"],"둘레를 먼저 그리고 세로획은 맨 마지막!"],
+["小","작을 소","가장 먼저 쓰는 획은?","가운데 세로 갈고리",["왼쪽 점","오른쪽 점","아무거나"],"小는 가운데부터! 그다음 왼쪽, 오른쪽"],
+["十","열 십","가장 먼저 쓰는 획은?","가로획(一)",["세로획(丨)","점","둘 다 동시에"],"가로 먼저, 세로 나중 — 필순의 기본 규칙"],
+["山","메 산","가장 먼저 쓰는 획은?","가운데 세로획",["왼쪽 세로획","오른쪽 세로획","아래 가로획"],"山도 가운데 봉우리부터 그려요"],
+["川","내 천","쓰는 순서로 맞는 것은?","왼쪽부터 차례대로",["오른쪽부터","가운데부터","아래부터"],"왼쪽에서 오른쪽으로 — 필순의 기본 규칙"],
+["火","불 화","가장 마지막에 쓰는 획은?","오른쪽 파임(㇏)",["왼쪽 점","오른쪽 점","가운데 삐침"],"불꽃 점들을 먼저, 큰 획은 나중에"]
+].map(x=>({t:"stroke",q:x[0],qh:x[1],ask:x[2],a:x[3],d:x[4],tip:x[5]}));
+
+/* 유형 7 · 뜻에 맞는 한자어 고르기 — 객관식 */
+const MEAN=[
+["몸을 움직여 건강을 기르는 일","運動",["讀書","計算","飮食"],"옮길 운 + 움직일 동"],
+["책을 읽음","讀書",["圖書","作文","習字"],"읽을 독 + 글 서"],
+["물건을 사고파는 곳","市場",["工場","運動場","學校"],"저자 시 + 마당 장"],
+["병을 고치는 재주","醫術",["美術","手術","算數"],"의원 의 + 재주 술"],
+["다른 나라","外國",["內部","國內","母國"],"바깥 외 + 나라 국"],
+["해가 지는 저녁 무렵","夕陽",["朝夕","太陽","夜間"],"저녁 석 + 볕 양"]
+].map(x=>({t:"mean",q:x[0],a:x[1],d:x[2],tip:x[3]}));
+
+const TYPE_META={
+  read:{label:"독음 쓰기",prompt:"이 한자어의 독음(읽는 소리)을 한글로 쓰세요"},
+  hun:{label:"훈음 쓰기",prompt:"이 한자의 훈(뜻)과 음(소리)을 쓰세요"},
+  write:{label:"한자 쓰기",prompt:"이 훈음에 맞는 한자를 종이에 써 보세요"},
+  oppo:{label:"반대자",prompt:"뜻이 반대(상대)인 한자를 고르세요"},
+  idiom:{label:"사자성어",prompt:"빈칸에 들어갈 한자를 고르세요"},
+  stroke:{label:"필순",prompt:"한자를 쓰는 순서를 생각해 보세요"},
+  mean:{label:"뜻풀이",prompt:"다음 뜻에 맞는 한자어를 고르세요"}
+};
+const BANKS={read:READ,hun:HUN,write:WRITE,oppo:OPPO,idiom:IDIOM,stroke:STROKE,mean:MEAN};
+
+/* ---------- 공통 ---------- */
+const app=document.getElementById("app");
+let S={};
+let timerId=null;
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function norm(s){return (s||"").replace(/\s+/g,"").trim();}
+function esc(s){return s.replace(/'/g,"\\'");}
+function stopTimer(){if(timerId){clearInterval(timerId);timerId=null;}}
+
+/* ---------- 홈 ---------- */
+function home(){
+  stopTimer();
+  app.innerHTML=`
+  <p class="eyebrow">연습 방법 고르기</p>
+  <h2 class="sect">오늘은 어떤 연습을 해 볼까요?</h2>
+  <p class="sub">실제 시험처럼 독음·훈음은 직접 입력하고, 한자 쓰기는 종이에 쓴 뒤 스스로 채점해요.</p>
+  <div class="modes">
+    <button class="mode" onclick="startMock()">
+      <span class="glyph g-red">試</span>
+      <span><b>실전 모의고사 · 25문항</b><span>실제 시험과 같은 비율로 모든 유형이 섞여 나와요 (합격선 18문항)</span></span>
+    </button>
+    <button class="mode" onclick="typeMenu()">
+      <span class="glyph g-green">習</span>
+      <span><b>유형별 집중 연습</b><span>독음 · 훈음 · 반대자 · 사자성어 · 필순 · 뜻풀이 골라서 연습</span></span>
+    </button>
+    <button class="mode" onclick="startWrite()">
+      <span class="glyph g-ink">書</span>
+      <span><b>한자 쓰기 연습 · 10자</b><span>훈음을 보고 종이에 직접 쓴 뒤 답을 확인해요 (쓰기 배정한자)</span></span>
+    </button>
+  </div>`;
+}
+
+/* ---------- 유형 메뉴 ---------- */
+function typeMenu(){
+  stopTimer();
+  const cells=Object.entries(TYPE_META).filter(([k])=>k!=="write").map(([k,m])=>
+    `<button class="typebtn" onclick="startType('${k}')"><b>${m.label}</b><span>${BANKS[k].length}문제 은행</span></button>`).join("");
+  app.innerHTML=`
+  <button class="backlink" onclick="home()">← 처음으로</button>
+  <p class="eyebrow">유형별 집중 연습</p>
+  <h2 class="sect">약한 유형을 골라 연습해요</h2>
+  <p class="sub">유형마다 8문제씩 무작위로 나와요.</p>
+  <div class="typegrid">${cells}</div>`;
+}
+
+/* ---------- 세트 시작 ---------- */
+function startMock(){
+  const qs=[
+    ...shuffle(READ).slice(0,8),
+    ...shuffle(HUN).slice(0,6),
+    ...shuffle(WRITE).slice(0,3),
+    ...shuffle(OPPO).slice(0,2),
+    ...shuffle(IDIOM).slice(0,2),
+    ...shuffle(STROKE).slice(0,2),
+    ...shuffle(MEAN).slice(0,2)
+  ];
+  begin(shuffle(qs),"실전 모의고사",true);
+}
+function startType(k){begin(shuffle(BANKS[k]).slice(0,8),TYPE_META[k].label+" 연습",false);}
+function startWrite(){begin(shuffle(WRITE).slice(0,10),"한자 쓰기 연습",false);}
+
+function begin(qs,title,timed){
+  S={qs,title,timed,i:0,correct:0,streak:0,best:0,wrong:[],locked:false,sec:0};
+  stopTimer();
+  if(timed){timerId=setInterval(()=>{S.sec++;const el=document.getElementById("tm");if(el)el.textContent=fmt(S.sec);},1000);}
+  render();
+}
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");}
+
+/* ---------- 문제 렌더 ---------- */
+function render(){
+  const q=S.qs[S.i],m=TYPE_META[q.t],n=S.qs.length;
+  let body="";
+  if(q.t==="read"||q.t==="hun"){
+    body=`<div class="hanja-lg" lang="zh-Hant">${q.q}</div>
+    <div style="margin-top:22px" class="answer-row">
+      <input class="ans" id="inp" autocomplete="off" placeholder="${q.t==="read"?"독음을 한글로":"예: 눈 설"}" onkeydown="if(event.key==='Enter')checkTyped()">
+      <button class="primary" onclick="checkTyped()">확인</button>
+    </div>`;
+  }else if(q.t==="write"){
+    body=`<div class="hanja-md">${q.q}</div>
+    <p class="hint">종이에 한자를 쓴 다음, 답을 확인해요</p>
+    <div class="gridbox empty" id="gb"><span class="x1"></span><span class="x2"></span><span class="ch">?</span></div>
+    <div style="margin-top:18px" id="wctl"><button class="primary" onclick="revealWrite()">답 확인하기</button></div>`;
+  }else{
+    let head="";
+    if(q.t==="oppo") head=`<div class="hanja-lg" lang="zh-Hant">${q.q}</div><p class="hint">${q.qh}</p>`;
+    else if(q.t==="idiom") head=`<div class="hanja-md" lang="zh-Hant">${q.q}</div><p class="hint">뜻: ${q.hint}</p>`;
+    else if(q.t==="stroke") head=`<div class="hanja-lg" lang="zh-Hant">${q.q}</div><p class="hint">${q.qh} · ${q.ask}</p>`;
+    else head=`<div class="hanja-md" style="font-family:var(--sans);font-size:22px;font-weight:700">“${q.q}”</div>`;
+    const opts=shuffle([q.a,...q.d]);
+    body=`${head}<div class="choices" style="margin-top:20px">${
+      opts.map((o,idx)=>`<button class="choice" onclick="checkChoice(this,'${esc(o)}')"><span class="num">${idx+1}</span>${o}</button>`).join("")}</div>`;
+  }
+  app.innerHTML=`
+  <button class="backlink" onclick="home()">← 그만하고 처음으로</button>
+  <div class="bar">
+    <span><b>${S.title}</b> · ${S.i+1} / ${n}</span>
+    ${S.timed?`<span class="timer" id="tm">${fmt(S.sec)}</span>`:""}
+    <span>${S.streak>1?`<span class="streak">${S.streak}연속 정답!</span>`:`맞힌 문제 <b>${S.correct}</b>`}</span>
+  </div>
+  <div class="track"><div class="fill" style="width:${Math.round(S.i/n*100)}%"></div></div>
+  <div class="qcard">
+    <span class="qtype">유형 · ${m.label}</span>
+    <p style="font-size:14px;color:var(--ink-soft);margin-bottom:14px">${m.prompt}</p>
+    ${body}
+  </div>
+  <div class="fb" id="fb"></div>`;
+  const inp=document.getElementById("inp");
+  if(inp)inp.focus();
+}
+
+/* ---------- 채점 ---------- */
+function grade(ok,ansText,q){
+  if(ok){S.correct++;S.streak++;S.best=Math.max(S.best,S.streak);}
+  else{S.streak=0;S.wrong.push(q);}
+  const fb=document.getElementById("fb");
+  fb.innerHTML=`<p class="head ${ok?"good":"bad"}">${ok?"정답이에요!":"아쉬워요! 정답은 「"+ansText+"」"}${q.full?" · "+q.full:""}</p>
+  ${q.tip?`<p class="tip">암기 열쇠 · ${q.tip}</p>`:""}`;
+  S.locked=true;
+  setTimeout(()=>{S.locked=false;S.i++;S.i<S.qs.length?render():finish();},q.tip?2400:1300);
+}
+window.checkTyped=function(){
+  if(S.locked)return;
+  const q=S.qs[S.i],v=norm(document.getElementById("inp").value);
+  if(!v)return;
+  const ok=q.accept.map(norm).includes(v);
+  grade(ok,q.t==="read"?q.accept[0]:q.disp,q);
+};
+window.checkChoice=function(btn,choice){
+  if(S.locked)return;
+  const q=S.qs[S.i];
+  const ok=choice===q.a;
+  btn.classList.add(ok?"ok":"no");
+  if(!ok)document.querySelectorAll(".choice").forEach(b=>{if(b.textContent.replace(/^\d/,"").trim()===q.a)b.classList.add("ok");});
+  grade(ok,q.t==="oppo"?q.a+" ("+q.ah+")":q.a,q);
+};
+window.revealWrite=function(){
+  const q=S.qs[S.i];
+  const gb=document.getElementById("gb");
+  gb.classList.remove("empty");
+  gb.querySelector(".ch").textContent=q.a;
+  gb.querySelector(".ch").setAttribute("lang","zh-Hant");
+  document.getElementById("wctl").innerHTML=`
+    <p class="tip" style="font-size:14px;color:var(--ink-soft);margin-bottom:12px">암기 열쇠 · ${q.tip}</p>
+    <button class="primary" onclick="selfGrade(true)">맞게 썼어요</button>
+    <button class="ghost" onclick="selfGrade(false)">틀렸어요, 다시 볼래요</button>`;
+};
+window.selfGrade=function(ok){
+  if(S.locked)return;
+  const q=S.qs[S.i];
+  if(ok){S.correct++;S.streak++;S.best=Math.max(S.best,S.streak);}
+  else{S.streak=0;S.wrong.push(q);}
+  S.i++;S.i<S.qs.length?render():finish();
+};
+
+/* ---------- 결과 ---------- */
+function finish(){
+  stopTimer();
+  const n=S.qs.length,rate=Math.round(S.correct/n*100),pass=rate>=70;
+  const stamp=pass
+    ?`<div class="stampwrap"><div class="bigstamp">合格</div></div>
+      <h2 class="sect">${rate===100?"만점 합격! 한자 박사 아윤!":"합격이에요! 정말 잘했어요!"}</h2>`
+    :`<div class="stampwrap"><div class="bigstamp fail">다시 도전</div></div>
+      <h2 class="sect">조금만 더 하면 합격이에요!</h2>`;
+  const review=S.wrong.length
+    ?`<div class="review"><h3>다시 볼 문제 복습 노트 (${S.wrong.length}개)</h3>${
+      S.wrong.map(w=>{
+        let qd,ad;
+        if(w.t==="read"){qd=w.q;ad=w.accept[0];}
+        else if(w.t==="hun"){qd=w.q;ad=w.disp;}
+        else if(w.t==="write"){qd=w.q;ad=w.a;}
+        else if(w.t==="oppo"){qd=w.q+" ("+w.qh+")";ad=w.a+" ("+w.ah+")";}
+        else if(w.t==="idiom"){qd=w.q;ad=w.a+" · "+w.full;}
+        else if(w.t==="stroke"){qd=w.q+" · "+w.ask;ad=w.a;}
+        else{qd="“"+w.q+"”";ad=w.a;}
+        return `<div class="item"><span class="q" lang="zh-Hant">${qd}</span> → <span class="a">${ad}</span>${w.tip?`<div class="t">${w.tip}</div>`:""}</div>`;
+      }).join("")}</div>`
+    :`<p class="perfect">틀린 문제가 하나도 없어요! 대단해요!</p>`;
+  app.innerHTML=`
+  <div class="result">
+    ${stamp}
+    <p class="sub" style="margin-top:6px">합격선은 70%예요${S.timed?` · 걸린 시간 ${fmt(S.sec)}`:""}</p>
+    <div class="scorebar">
+      <div class="scorecell"><small>맞힌 문제</small><b>${S.correct} / ${n}</b></div>
+      <div class="scorecell"><small>정답률</small><b>${rate}%</b></div>
+      <div class="scorecell"><small>최고 연속</small><b>${S.best}개</b></div>
+    </div>
+    ${review}
+    <button class="primary" onclick="retry()" style="margin-right:8px">한 번 더</button>
+    <button class="ghost" onclick="home()">처음으로</button>
+  </div>`;
+}
+window.retry=function(){
+  if(S.title==="실전 모의고사")startMock();
+  else if(S.title==="한자 쓰기 연습")startWrite();
+  else{const k=Object.entries(TYPE_META).find(([,m])=>S.title.startsWith(m.label));k?startType(k[0]):startMock();}
+};
+window.home=home;window.typeMenu=typeMenu;window.startMock=startMock;window.startType=startType;window.startWrite=startWrite;
+home();
+</script>
 </body>
 </html>
